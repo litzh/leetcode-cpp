@@ -2,11 +2,11 @@
 #include <unordered_map>
 #include <vector>
 
-static std::vector<int> twoSum(const std::vector<int>&nums, int target)
+static std::vector<int> twoSum(const std::vector<int>&nums, const int target)
 {
     std::unordered_map<int, int> complement;
     std::vector<int> result;
-    const int size = nums.size();
+    const int size = static_cast<int>(nums.size());
     for (int i = 0; i < size; ++i) {
         const auto it = complement.find(nums[i]);
         if (it != complement.end()) {

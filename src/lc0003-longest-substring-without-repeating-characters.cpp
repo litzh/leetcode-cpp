@@ -7,8 +7,8 @@ static int lengthOfLongestSubstring(const std::string& s) {
         return 0;
     }
     std::unordered_map<char, size_t> char_pos = {{s[0], 0}};
-    int longest = 1;
-    int len = 1;
+    size_t longest = 1;
+    size_t len = 1;
     size_t i = 1;
     while (i < s.length()) {
         char c = s[i];
@@ -28,14 +28,14 @@ static int lengthOfLongestSubstring(const std::string& s) {
                 ++i;
             } else {
                 len = 1;
-                int next = it->second + 1;
+                size_t next = it->second + 1;
                 char_pos.clear();  // 注意迭代器失效
                 char_pos.insert({s[next], next});
                 i = next + 1;
             }
         }
     }
-    return longest;
+    return static_cast<int>(longest);
 }
 
 #include <catch2/catch_test_macros.hpp>

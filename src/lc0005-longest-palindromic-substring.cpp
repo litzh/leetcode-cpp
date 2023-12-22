@@ -5,7 +5,7 @@ std::string longestPalindrome(const std::string& s) {
     }
     int begin = 0, end = 1;
     // 插入空格，处理偶数回文
-    const int len = s.length();
+    const int len = static_cast<int>(s.length());
     const int total = len * 2 - 1;
     for (int i = 1; i < total; ++i) {
         const int center = i / 2;

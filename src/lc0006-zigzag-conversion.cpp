@@ -1,7 +1,7 @@
 #include <string>
 
 static std::string convert(const std::string& s, const int numRows) {
-    const int len = s.size();
+    const int len = static_cast<int>(s.size());
     if (numRows == 1 || len <= 1) {
         return s;
     }
