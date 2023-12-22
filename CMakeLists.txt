@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.27)
+cmake_minimum_required(VERSION 3.25)
 project(leetcode)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
