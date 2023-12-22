@@ -6,7 +6,7 @@ static std::vector<int> twoSum(const std::vector<int>&nums, int target)
 {
     std::unordered_map<int, int> complement;
     std::vector<int> result;
-    const int size = static_cast<int>(nums.size());
+    const int size = nums.size();
     for (int i = 0; i < size; ++i) {
         const auto it = complement.find(nums[i]);
         if (it != complement.end()) {
@@ -23,7 +23,7 @@ static std::vector<int> twoSum(const std::vector<int>&nums, int target)
 
 TEST_CASE("Two Sum", "[LC0001]")
 {
-    std::vector<int> nums{2, 7, 11, 15};
+    const std::vector<int> nums{2, 7, 11, 15};
     REQUIRE(twoSum(nums, 9) == std::vector<int>{0, 1});
     REQUIRE(twoSum(nums, 13) == std::vector<int>{0, 2});
 }
