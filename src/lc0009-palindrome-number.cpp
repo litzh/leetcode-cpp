@@ -1,9 +1,7 @@
 #include <cstdint>
 
-namespace lc0009
-{
-bool isPalindrome(const int x)
-{
+namespace lc0009 {
+bool isPalindrome(const int x) {
     if (x < 0) {
         return false;
     }
@@ -16,4 +14,4 @@ bool isPalindrome(const int x)
     }
     return x == rev;
 }
-}
+}  // namespace lc0009

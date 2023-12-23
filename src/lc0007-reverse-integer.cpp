@@ -1,6 +1,5 @@
 #include <climits>
-namespace lc0007
-{
+namespace lc0007 {
 int reverse(int x) {
     int rev = 0;
     while (x != 0) {
@@ -13,4 +12,4 @@ int reverse(int x) {
     }
     return rev;
 }
-}
+}  // namespace lc0007

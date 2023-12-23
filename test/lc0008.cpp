@@ -1,9 +1,9 @@
 #include <leetcode.h>
+
 #include <catch2/catch_test_macros.hpp>
 
 using namespace lc0008;
-TEST_CASE("String to Integer (atoi)", "[LC0008]")
-{
+TEST_CASE("String to Integer (atoi)", "[LC0008]") {
     REQUIRE(myAtoi("+1") == 1);
     REQUIRE(myAtoi("42") == 42);
     REQUIRE(myAtoi("   -42") == -42);

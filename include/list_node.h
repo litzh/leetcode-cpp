@@ -5,7 +5,7 @@ struct ListNode {
     int val;
     ListNode* next;
     ListNode() : val(0), next(nullptr) {}
-    explicit ListNode(int x) : val(x), next(nullptr) {}
+    explicit ListNode(const int x) : val(x), next(nullptr) {}
     ListNode(const int x, ListNode* next) : val(x), next(next) {}
 };
 
@@ -24,7 +24,7 @@ static ListNode* list_from_vector(const std::vector<int>& vec) {
     return head;
 }
 
-static std::vector<int> list_to_vector(ListNode* head) {
+static std::vector<int> list_to_vector(const ListNode* head) {
     std::vector<int> vec;
     while (head != nullptr) {
         vec.push_back(head->val);
@@ -34,9 +34,9 @@ static std::vector<int> list_to_vector(ListNode* head) {
 }
 
 static void list_freep(ListNode** headp) {
-    ListNode* head = *headp;
+    const ListNode* head = *headp;
     while (head != nullptr) {
-        ListNode* node = head;
+        const ListNode* node = head;
         head = head->next;
         delete node;
     }

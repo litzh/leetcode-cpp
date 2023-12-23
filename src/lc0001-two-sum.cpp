@@ -1,10 +1,8 @@
 #include <unordered_map>
 #include <vector>
 
-namespace lc0001
-{
-std::vector<int> twoSum(const std::vector<int>&nums, const int target)
-{
+namespace lc0001 {
+std::vector<int> twoSum(const std::vector<int>& nums, const int target) {
     std::unordered_map<int, int> complement;
     std::vector<int> result;
     const int size = static_cast<int>(nums.size());
@@ -18,5 +16,5 @@ std::vector<int> twoSum(const std::vector<int>&nums, const int target)
     }
     return result;
 }
-}
+}  // namespace lc0001
 

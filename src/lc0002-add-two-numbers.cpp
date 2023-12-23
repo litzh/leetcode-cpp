@@ -1,7 +1,6 @@
 #include <list_node.h>
 
-namespace lc0002
-{
+namespace lc0002 {
 ListNode *addTwoNumbers(const ListNode *l1, const ListNode *l2) {
     int carry = 0;
     ListNode *head = nullptr;
@@ -33,4 +32,4 @@ ListNode *addTwoNumbers(const ListNode *l1, const ListNode *l2) {
     }
     return head;
 }
-}
+}  // namespace lc0002
