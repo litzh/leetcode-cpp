@@ -40,5 +40,8 @@ extern bool isPalindrome(int x);
 namespace lc0011 {
 extern int maxArea(const std::vector<int>& height);
 }
+namespace lc0012 {
+extern std::string intToRoman(int num);
+}
 
 #endif  // LEETCODE_H
