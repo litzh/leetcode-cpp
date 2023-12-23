@@ -2,7 +2,10 @@
 #include <string>
 #include <unordered_map>
 
-static int lengthOfLongestSubstring(const std::string& s) {
+namespace lc0003
+{
+int lengthOfLongestSubstring(const std::string&s)
+{
     if (s.empty()) {
         return 0;
     }
@@ -20,16 +23,18 @@ static int lengthOfLongestSubstring(const std::string& s) {
                 longest = len;
             }
             ++i;
-        } else {
+        }
+        else {
             len = i - it->second;
             if (len >= longest) {
                 longest = len;
                 char_pos[c] = i;
                 ++i;
-            } else {
+            }
+            else {
                 len = 1;
                 size_t next = it->second + 1;
-                char_pos.clear();  // 注意迭代器失效
+                char_pos.clear(); // 注意迭代器失效
                 char_pos.insert({s[next], next});
                 i = next + 1;
             }
@@ -37,13 +42,4 @@ static int lengthOfLongestSubstring(const std::string& s) {
     }
     return static_cast<int>(longest);
 }
-
-#include <catch2/catch_test_macros.hpp>
-
-TEST_CASE("Longest Substring Without Repeating Characters", "[LC0003]") {
-    REQUIRE(lengthOfLongestSubstring("abcabcbb") == 3);
-    REQUIRE(lengthOfLongestSubstring("bbbbb") == 1);
-    REQUIRE(lengthOfLongestSubstring("pwwkew") == 3);
-    REQUIRE(lengthOfLongestSubstring("vqblqcb") == 4);
-    REQUIRE(lengthOfLongestSubstring("ohvhjdml") == 6);
 }

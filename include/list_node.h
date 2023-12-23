@@ -1,21 +1,21 @@
-#ifndef __LIST_NODE_H__
-#define __LIST_NODE_H__
+#ifndef LIST_NODE_H
+#define LIST_NODE_H
 #include <vector>
 struct ListNode {
     int val;
     ListNode* next;
     ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode* next) : val(x), next(next) {}
+    explicit ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(const int x, ListNode* next) : val(x), next(next) {}
 };
 
-static inline ListNode* list_from_vector(const std::vector<int> vec) {
+static ListNode* list_from_vector(const std::vector<int>& vec) {
     ListNode* head = nullptr;
     ListNode* tail = nullptr;
     for (auto& val : vec) {
-        if (head == nullptr) {
-            head = new ListNode(val);
-            tail = head;
+        if (tail == nullptr) {
+            tail = new ListNode(val);
+            head = tail;
         } else {
             tail->next = new ListNode(val);
             tail = tail->next;
@@ -24,7 +24,7 @@ static inline ListNode* list_from_vector(const std::vector<int> vec) {
     return head;
 }
 
-static inline std::vector<int> list_to_vector(ListNode* head) {
+static std::vector<int> list_to_vector(ListNode* head) {
     std::vector<int> vec;
     while (head != nullptr) {
         vec.push_back(head->val);
@@ -33,7 +33,7 @@ static inline std::vector<int> list_to_vector(ListNode* head) {
     return vec;
 }
 
-static inline void list_freep(ListNode** headp) {
+static void list_freep(ListNode** headp) {
     ListNode* head = *headp;
     while (head != nullptr) {
         ListNode* node = head;

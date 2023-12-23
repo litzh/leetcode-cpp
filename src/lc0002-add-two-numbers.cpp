@@ -1,6 +1,8 @@
 #include <list_node.h>
 
-static ListNode *addTwoNumbers(const ListNode *l1, const ListNode *l2) {
+namespace lc0002
+{
+ListNode *addTwoNumbers(const ListNode *l1, const ListNode *l2) {
     int carry = 0;
     ListNode *head = nullptr;
     ListNode *tail = nullptr;
@@ -31,25 +33,4 @@ static ListNode *addTwoNumbers(const ListNode *l1, const ListNode *l2) {
     }
     return head;
 }
-
-#include <catch2/catch_test_macros.hpp>
-
-TEST_CASE("Add Two Numbers", "[LC0002]") {
-    ListNode *l1 = list_from_vector(std::vector<int>{2, 4, 3});
-    ListNode *l2 = list_from_vector(std::vector<int>{5, 6, 4});
-    ListNode *l3 = addTwoNumbers(l1, l2);
-    REQUIRE(list_to_vector(l3) == std::vector<int>{7, 0, 8});
-    list_freep(&l1);
-    list_freep(&l2);
-    list_freep(&l3);
-}
-
-TEST_CASE("Dangling Carry", "[LC0002]") {
-    ListNode *l1 = list_from_vector(std::vector<int>{9, 9, 9, 9, 9, 9, 9});
-    ListNode *l2 = list_from_vector(std::vector<int>{9, 9, 9, 9});
-    ListNode *l3 = addTwoNumbers(l1, l2);
-    REQUIRE(list_to_vector(l3) == std::vector<int>{8, 9, 9, 9, 0, 0, 0, 1});
-    list_freep(&l1);
-    list_freep(&l2);
-    list_freep(&l3);
 }

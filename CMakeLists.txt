@@ -3,6 +3,7 @@ project(leetcode)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 file(GLOB_RECURSE CPP_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE TEST_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
 
 Include(FetchContent)
 FetchContent_Declare(
@@ -11,7 +12,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(tests ${CPP_FILES})
+add_executable(tests ${CPP_FILES} ${TEST_FILES})
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
 set_property(TARGET tests PROPERTY CXX_STANDARD 17)
 target_compile_options(tests PRIVATE 

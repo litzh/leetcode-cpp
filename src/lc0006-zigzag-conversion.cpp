@@ -1,6 +1,8 @@
 #include <string>
 
-static std::string convert(const std::string& s, const int numRows) {
+namespace lc0006
+{
+std::string convert(const std::string& s, const int numRows) {
     const int len = static_cast<int>(s.size());
     if (numRows == 1 || len <= 1) {
         return s;
@@ -10,12 +12,11 @@ static std::string convert(const std::string& s, const int numRows) {
         int n = 0;
         while (true) {
             const int cur = (numRows - 1) * 2 * n + row;
-            const int prev = cur - row * 2;
-            if (prev < len) {
+            if (const int prev = cur - row * 2; prev < len) {
                 if (prev >= 0 && prev != cur &&
                     cur - prev != (numRows - 1) * 2) {
                     result.push_back(s[prev]);
-                }
+                    }
             }
             if (cur < len) {
                 result.push_back(s[cur]);
@@ -27,11 +28,4 @@ static std::string convert(const std::string& s, const int numRows) {
     }
     return result;
 }
-
-#include <catch2/catch_test_macros.hpp>
-
-TEST_CASE("Zigzag Conversion", "[LC0006]") {
-    REQUIRE(convert("PAYPALISHIRING", 3) == "PAHNAPLSIIGYIR");
-    REQUIRE(convert("PAYPALISHIRING", 4) == "PINALSIGYAHRPI");
-    REQUIRE(convert("A", 1) == "A");
 }

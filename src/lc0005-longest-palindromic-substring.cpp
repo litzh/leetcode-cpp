@@ -1,5 +1,9 @@
 #include <string>
-std::string longestPalindrome(const std::string& s) {
+
+namespace lc0005
+{
+std::string longestPalindrome(const std::string&s)
+{
     if (s.length() <= 1) {
         return s;
     }
@@ -17,17 +21,12 @@ std::string longestPalindrome(const std::string& s) {
                     begin = left;
                     end = right + 1;
                 }
-            } else {
+            }
+            else {
                 break;
             }
         }
     }
     return s.substr(begin, end - begin);
 }
-
-#include <catch2/catch_test_macros.hpp>
-
-TEST_CASE("Longest Palindromic Substring", "[LC0005]") {
-    REQUIRE(longestPalindrome("babad") == "bab");
-    REQUIRE(longestPalindrome("cbbd") == "bb");
 }
