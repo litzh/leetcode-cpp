@@ -6,14 +6,14 @@ file(GLOB_RECURSE CPP_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 Include(FetchContent)
 FetchContent_Declare(
-    Catch2
-    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+    Catch2 GIT_REPOSITORY https://github.com/catchorg/Catch2.git
     GIT_TAG        v3.5.0 # or a later release
 )
 FetchContent_MakeAvailable(Catch2)
 
 add_executable(tests ${CPP_FILES})
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+set_property(TARGET tests PROPERTY CXX_STANDARD 17)
 target_compile_options(tests PRIVATE 
     -Wall 
     -Wextra 
@@ -32,3 +32,7 @@ target_compile_options(tests PRIVATE
 include(CTest)
 include(Catch)
 catch_discover_tests(tests)
+
+find_program(CLANG_TIDY_EXE NAMES "clang-tidy" REQUIRED)
+set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXE}" "--format-style=llvm")
+set_target_properties(tests PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND}")

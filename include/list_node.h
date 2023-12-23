@@ -33,4 +33,14 @@ static inline std::vector<int> list_to_vector(ListNode* head) {
     return vec;
 }
 
+static inline void list_freep(ListNode** headp) {
+    ListNode* head = *headp;
+    while (head != nullptr) {
+        ListNode* node = head;
+        head = head->next;
+        delete node;
+    }
+    *headp = nullptr;
+}
+
 #endif
