@@ -33,3 +33,7 @@ target_compile_options(tests PRIVATE
 include(CTest)
 include(Catch)
 catch_discover_tests(tests)
+
+find_program(CLANG_TIDY_EXE NAMES "clang-tidy" REQUIRED)
+set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXE}" "--format-style=llvm")
+set_target_properties(tests PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND}")
