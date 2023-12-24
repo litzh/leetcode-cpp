@@ -40,7 +40,7 @@ n == height.length
 2 <= n <= 100000
 0 <= height[i] <= 10000
 */
-TEST_CASE("Container With Most Water Fuzz", "[LC0011]") {
+TEST_CASE("Container With Most Water Fuzz", "[LC0011][.Fuzz]") {
     constexpr size_t batch = 100;
     std::vector<int> fuzz(batch);
     std::random_device dev;
