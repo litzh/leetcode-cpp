@@ -14,19 +14,55 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
-    - name: Configure Clang Tidy
-      run: sudo apt install clang-tidy
+    - name: Configure Clang
+      run: |
+        wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+        echo 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy main'|sudo tee /etc/apt/sources.list.d/llvm.list
+        sudo apt update
+        sudo apt install -y clang clang-tidy clang-format llvm
+        clang --version
+        llvm-profdata --version
+        llvm-cov --version
+
+    - name: Config CMake
+      run: |
+        sudo apt install -y python-is-python3 python3-pip
+        python --version
+        sudo python -m pip install --upgrade pip
+        sudo python -m pip install --upgrade cmake ninja
+        cmake --version
+        ninja --version
 
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: |
+        cmake -B ${{github.workspace}}/build \
+          -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
+          -DCMAKE_CXX_FLAGS="-fprofile-instr-generate -fcoverage-mapping" \
+          -DCMAKE_C_FLAGS="-fprofile-instr-generate -fcoverage-mapping" \
+          -DCMAKE_CXX_COMPILER=clang++ \
+          -DCMAKE_C_COMPILER=clang \
+          -G Ninja
 
     - name: Build
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel 
+      run: |
+        cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} 
 
     - name: Test
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{env.BUILD_TYPE}}
 
+    - name: Coverage
+      working-directory: ${{github.workspace}}/build
+      run: |
+        LLVM_PROFILE_FILE="tests.profraw" ./tests
+        llvm-profdata merge -sparse tests.profraw -o tests.profdata
+        llvm-cov show ./tests -ignore-filename-regex="build/|include/|test/" -instr-profile=tests.profdata -format=html -output-dir=cov-html
 
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ${{github.workspace}}/build/cov-html
+        publish_branch: gh-pages  # deploying branch
