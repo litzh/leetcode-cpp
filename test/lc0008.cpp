@@ -6,6 +6,9 @@ using namespace lc0008;
 TEST_CASE("String to Integer (atoi)", "[LC0008]") {
     REQUIRE(myAtoi("+1") == 1);
     REQUIRE(myAtoi("42") == 42);
+    REQUIRE(myAtoi("   ") == 0);
+    REQUIRE(myAtoi("+") == 0);
+    REQUIRE(myAtoi("/") == 0);
     REQUIRE(myAtoi("   -42") == -42);
     REQUIRE(myAtoi("4193 with words") == 4193);
     REQUIRE(myAtoi("words and 987") == 0);

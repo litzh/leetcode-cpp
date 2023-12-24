@@ -7,4 +7,5 @@ TEST_CASE("Zigzag Conversion", "[LC0006]") {
     REQUIRE(convert("PAYPALISHIRING", 3) == "PAHNAPLSIIGYIR");
     REQUIRE(convert("PAYPALISHIRING", 4) == "PINALSIGYAHRPI");
     REQUIRE(convert("A", 1) == "A");
+    REQUIRE(convert("", 2).empty());
 }

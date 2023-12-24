@@ -21,4 +21,12 @@ TEST_CASE("Dangling Carry", "[LC0002]") {
     list_freep(&l1);
     list_freep(&l2);
     list_freep(&l3);
+
+    l2 = list_from_vector(std::vector{9, 9, 9, 9, 9, 9, 9});
+    l1 = list_from_vector(std::vector{9, 9, 9, 9});
+    l3 = addTwoNumbers(l1, l2);
+    REQUIRE(list_to_vector(l3) == std::vector<int>{8, 9, 9, 9, 0, 0, 0, 1});
+    list_freep(&l1);
+    list_freep(&l2);
+    list_freep(&l3);
 }

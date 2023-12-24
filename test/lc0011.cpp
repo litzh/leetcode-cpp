@@ -29,6 +29,10 @@ TEST_CASE("Container With Most Water", "[LC0011]") {
     REQUIRE(maxArea(pool) == 49);
     pool = {1, 1};
     REQUIRE(maxArea(pool) == 1);
+    pool = {
+        1, 1, 100, 1, 1,
+    };
+    REQUIRE(maxArea(pool) == 4);
 }
 
 /*
