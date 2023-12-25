@@ -39,13 +39,13 @@ n == height.length
 0 <= height[i] <= 10000
 */
 TEST_CASE("Container With Most Water Fuzz", "[LC0011][.Fuzz]") {
-    constexpr size_t batch = 100;
+    constexpr size_t batch = 1000;
     std::vector<int> fuzz(batch);
     std::random_device dev;
     std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> dist(0, 10000);
+    std::uniform_int_distribution dist(0, 10000);
     for (size_t i = 0; i < batch; ++i) {
-        fuzz.push_back(static_cast<int>(dist(rng)));
+        fuzz[i] = dist(rng);
     }
     REQUIRE(maxArea(fuzz) == bf(fuzz));
 }
