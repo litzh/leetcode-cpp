@@ -12,4 +12,5 @@ int reverse(int x) {
     }
     return rev;
 }
-}  // namespace lc0007
+} // namespace lc0007
+

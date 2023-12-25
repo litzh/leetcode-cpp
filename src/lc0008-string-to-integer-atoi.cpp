@@ -2,12 +2,13 @@
 #include <string>
 
 namespace lc0008 {
-int myAtoi(const std::string& s) {
+int myAtoi(const std::string &s) {
     const int len = static_cast<int>(s.size());
     int i = 0;
     int sign = 1;
     // 跳过开头空白
-    while (i < len && s[i] == ' ') ++i;
+    while (i < len && s[i] == ' ')
+        ++i;
     // 处理正负号
     if (i < len) {
         if (s[i] == '-') {
@@ -25,7 +26,8 @@ int myAtoi(const std::string& s) {
     int n = 0;
     while (i < len && s[i] >= '0' && s[i] <= '9') {
         if ((INT_MAX - s[i] + '0') / 10 < n) {
-            if (sign > 0) return INT_MAX;
+            if (sign > 0)
+                return INT_MAX;
             return INT_MIN;
         }
         n *= 10;
@@ -34,4 +36,5 @@ int myAtoi(const std::string& s) {
     }
     return n * sign;
 }
-}  // namespace lc0008
+} // namespace lc0008
+

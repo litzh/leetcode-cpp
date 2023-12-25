@@ -14,4 +14,5 @@ bool isPalindrome(const int x) {
     }
     return x == rev;
 }
-}  // namespace lc0009
+} // namespace lc0009
+

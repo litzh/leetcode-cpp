@@ -3,7 +3,7 @@
 #include <unordered_map>
 
 namespace lc0003 {
-int lengthOfLongestSubstring(const std::string& s) {
+int lengthOfLongestSubstring(const std::string &s) {
     if (s.empty()) {
         return 0;
     }
@@ -30,7 +30,7 @@ int lengthOfLongestSubstring(const std::string& s) {
             } else {
                 len = 1;
                 size_t next = it->second + 1;
-                char_pos.clear();  // 注意迭代器失效
+                char_pos.clear(); // 注意迭代器失效
                 char_pos.insert({s[next], next});
                 i = next + 1;
             }
@@ -38,4 +38,5 @@ int lengthOfLongestSubstring(const std::string& s) {
     }
     return static_cast<int>(longest);
 }
-}  // namespace lc0003
+} // namespace lc0003
+

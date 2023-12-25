@@ -3,7 +3,7 @@
 #include <vector>
 
 namespace lc0011 {
-int maxArea(const std::vector<int>& height) {
+int maxArea(const std::vector<int> &height) {
     size_t left = 0;
     size_t right = height.size() - 1;
     int max_area = 0;
@@ -14,10 +14,13 @@ int maxArea(const std::vector<int>& height) {
         const int w = static_cast<int>(right - left);
         max_area = std::max(max_area, h * w);
         if (lh <= rh)
-            while (left < right && height[left] <= lh) ++left;
+            while (left < right && height[left] <= lh)
+                ++left;
         else
-            while (right > left && height[right] <= rh) --right;
+            while (right > left && height[right] <= rh)
+                --right;
     }
     return max_area;
 }
-}  // namespace lc0011
+} // namespace lc0011
+

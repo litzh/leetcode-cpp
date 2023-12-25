@@ -1,7 +1,7 @@
 #include <string>
 
 namespace lc0006 {
-std::string convert(const std::string& s, const int numRows) {
+std::string convert(const std::string &s, const int numRows) {
     const int len = static_cast<int>(s.size());
     if (numRows == 1 || len <= 1) {
         return s;
@@ -12,8 +12,7 @@ std::string convert(const std::string& s, const int numRows) {
         while (true) {
             const int cur = (numRows - 1) * 2 * n + row;
             if (const int prev = cur - row * 2; prev < len) {
-                if (prev >= 0 && prev != cur &&
-                    cur - prev != (numRows - 1) * 2) {
+                if (prev >= 0 && prev != cur && cur - prev != (numRows - 1) * 2) {
                     result.push_back(s[prev]);
                 }
             }
@@ -27,4 +26,5 @@ std::string convert(const std::string& s, const int numRows) {
     }
     return result;
 }
-}  // namespace lc0006
+} // namespace lc0006
+

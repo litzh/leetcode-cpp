@@ -1,11 +1,14 @@
-#include <leetcode.h>
-
 #include <catch2/catch_test_macros.hpp>
+#include <literals.h>
 #include <random>
+
+namespace lc0011 {
+extern int maxArea(const std::vector<int> &height);
+}
 
 using namespace lc0011;
 
-static int bf(const std::vector<int>& height) {
+static int bf(const std::vector<int> &height) {
     size_t area = 0;
     int max_h = 0;
     for (size_t i = 0; i < height.size(); ++i) {
@@ -25,14 +28,9 @@ static int bf(const std::vector<int>& height) {
 }
 
 TEST_CASE("Container With Most Water", "[LC0011]") {
-    std::vector pool{1, 8, 6, 2, 5, 4, 8, 3, 7};
-    REQUIRE(maxArea(pool) == 49);
-    pool = {1, 1};
-    REQUIRE(maxArea(pool) == 1);
-    pool = {
-        1, 1, 100, 1, 1,
-    };
-    REQUIRE(maxArea(pool) == 4);
+    REQUIRE(maxArea("[1, 8, 6, 2, 5, 4, 8, 3, 7]"_VI) == 49);
+    REQUIRE(maxArea("[1, 1]"_VI) == 1);
+    REQUIRE(maxArea("[1, 1, 100, 1, 1]"_VI) == 4);
 }
 
 /*
@@ -51,3 +49,4 @@ TEST_CASE("Container With Most Water Fuzz", "[LC0011][.Fuzz]") {
     }
     REQUIRE(maxArea(fuzz) == bf(fuzz));
 }
+

@@ -32,4 +32,5 @@ ListNode *addTwoNumbers(const ListNode *l1, const ListNode *l2) {
     }
     return head;
 }
-}  // namespace lc0002
+} // namespace lc0002
+

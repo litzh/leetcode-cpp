@@ -1,6 +1,8 @@
-#include <leetcode.h>
-
 #include <catch2/catch_test_macros.hpp>
+
+namespace lc0008 {
+extern int myAtoi(const std::string &s);
+}
 
 using namespace lc0008;
 TEST_CASE("String to Integer (atoi)", "[LC0008]") {
@@ -18,3 +20,4 @@ TEST_CASE("String to Integer (atoi)", "[LC0008]") {
     REQUIRE(myAtoi("3.14159") == 3);
     REQUIRE(myAtoi("  -0012a42") == -12);
 }
+

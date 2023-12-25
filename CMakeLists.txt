@@ -15,23 +15,32 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
+FetchContent_Declare(
+    nlohmann_json GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG        v3.11.3 # or a later release
+)
+FetchContent_MakeAvailable(nlohmann_json)
+
 add_executable(tests ${CPP_FILES} ${TEST_FILES})
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(tests PRIVATE
+    Catch2::Catch2WithMain
+    nlohmann_json::nlohmann_json)
+
 set_property(TARGET tests PROPERTY CXX_STANDARD 17)
 target_compile_definitions(tests PRIVATE TEST_RESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/test/resource")
-target_compile_options(tests PRIVATE 
-    -Wall 
-    -Wextra 
-    -pedantic 
-    -Werror 
-    -Wno-unused-parameter 
-    -Wno-unused-variable 
-    -Wno-unused-but-set-variable 
-    -Wno-unused-function 
-    -Wno-unused-but-set-parameter 
-    -Wno-unused-result 
-    -Wno-unused-value 
-    -Wno-unused-local-typedefs 
+target_compile_options(tests PRIVATE
+    -Wall
+    -Wextra
+    -pedantic
+    -Werror
+    -Wno-unused-parameter
+    -Wno-unused-variable
+    -Wno-unused-but-set-variable
+    -Wno-unused-function
+    -Wno-unused-but-set-parameter
+    -Wno-unused-result
+    -Wno-unused-value
+    -Wno-unused-local-typedefs
     -ftrapv)
 
 include(CTest)

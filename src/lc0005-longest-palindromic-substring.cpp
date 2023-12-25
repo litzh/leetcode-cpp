@@ -1,7 +1,7 @@
 #include <string>
 
 namespace lc0005 {
-std::string longestPalindrome(const std::string& s) {
+std::string longestPalindrome(const std::string &s) {
     if (s.length() <= 1) {
         return s;
     }
@@ -11,8 +11,7 @@ std::string longestPalindrome(const std::string& s) {
     const int total = len * 2 - 1;
     for (int i = 1; i < total; ++i) {
         const int center = i / 2;
-        for (int j = (i + 1) % 2; center - j >= 0 && center + i % 2 + j < len;
-             ++j) {
+        for (int j = (i + 1) % 2; center - j >= 0 && center + i % 2 + j < len; ++j) {
             const int left = center - j;
             const int right = center + j + (i % 2);
             if (s[left] == s[right]) {
@@ -27,4 +26,5 @@ std::string longestPalindrome(const std::string& s) {
     }
     return s.substr(begin, end - begin);
 }
-}  // namespace lc0005
+} // namespace lc0005
+

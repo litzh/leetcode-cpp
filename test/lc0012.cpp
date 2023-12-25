@@ -1,8 +1,10 @@
-#include <leetcode.h>
-
 #include <catch2/catch_test_macros.hpp>
 #include <fstream>
 #include <map>
+
+namespace lc0012 {
+extern std::string intToRoman(int num);
+}
 
 using namespace lc0012;
 
@@ -20,7 +22,8 @@ static void load_roman_map() {
 TEST_CASE("Integer to Roman", "[LC0012]") {
     load_roman_map();
     REQUIRE(roman_map.size() == 3999);
-    for (const auto& [num, roman] : roman_map) {
+    for (const auto &[num, roman]: roman_map) {
         REQUIRE(intToRoman(num) == roman);
     }
 }
+
