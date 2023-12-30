@@ -4,7 +4,7 @@
 #include <vector>
 using json = nlohmann::json;
 
-static const std::vector<int> operator""_VI(const char *s, size_t) {
+static std::vector<int> operator""_VI(const char *s, size_t) {
     std::vector<int> result;
     json data = json::parse(s);
     for (const auto &i: data) {
@@ -13,7 +13,7 @@ static const std::vector<int> operator""_VI(const char *s, size_t) {
     return result;
 }
 
-static const std::vector<std::vector<int>> operator""_VVI(const char *s, size_t) {
+static std::vector<std::vector<int>> operator""_VVI(const char *s, size_t) {
     std::vector<std::vector<int>> result;
     json data = json::parse(s);
     for (const auto &i: data) {
@@ -25,5 +25,6 @@ static const std::vector<std::vector<int>> operator""_VVI(const char *s, size_t)
     }
     return result;
 }
+
 #endif
 
