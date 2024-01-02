@@ -29,6 +29,7 @@ cmake -B build \
     -DCMAKE_C_FLAGS="-fprofile-instr-generate -fcoverage-mapping" \
     -DCMAKE_CXX_COMPILER=clang++ \
     -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_EXPORT_COMPILE_COMMANDS=yes \
     -G Ninja
 
 # Build tests
