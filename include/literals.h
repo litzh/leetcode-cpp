@@ -6,18 +6,34 @@
 #include <vector>
 using json = nlohmann::json;
 
-template<typename E>
-static bool unordered_eq(const std::vector<std::vector<E>> &v1, const std::vector<std::vector<E>> &v2) {
-    if (v1.size() != v2.size())
-        return false;
-    auto s1(v1), s2(v2);
-    for (size_t i = 0; i < v1.size(); ++i) {
-        std::sort(s1[i].begin(), s1[i].end());
-        std::sort(s2[i].begin(), s2[i].end());
+static void sort_array(json &arr) {
+    if (!arr.is_array()) {
+        return;
     }
-    std::sort(s1.begin(), s1.end());
-    std::sort(s2.begin(), s2.end());
-    return s1 == s2;
+    for (auto &i: arr) {
+        sort_array(i);
+    }
+    std::sort(arr.begin(), arr.end());
+}
+
+template<typename E>
+static std::string str(const std::vector<E> &vec) {
+    json j = vec;
+    sort_array(j);
+    return j.dump();
+}
+
+// Compact
+static std::string operator""_C(const char *s, size_t) {
+    json data = json::parse(s);
+    return data.dump();
+}
+
+// Sort
+static std::string operator""_S(const char *s, size_t) {
+    json data = json::parse(s);
+    sort_array(data);
+    return data.dump();
 }
 
 static std::vector<int> operator""_VI(const char *s, size_t) {
