@@ -11,17 +11,22 @@ std::vector<int> &nextPermutation(std::vector<int> &nums);
 
 using namespace lc0031;
 TEST_CASE("Next Permutation", "[LC0031]") {
-    auto vec = "[1,2,3]"_VI;
-    REQUIRE(nextPermutation(vec) == "[1,3,2]"_VI);
-    vec = "[3,2,1]"_VI;
-    REQUIRE(nextPermutation(vec) == "[1,2,3]"_VI);
-    vec = "[1,1,5]"_VI;
-    REQUIRE(nextPermutation(vec) == "[1,5,1]"_VI);
+    auto cases = "[[1,2,3,4,5],[2,3,3],[1],[1,2,3,4,4]]"_VVI;
+    for (auto &i: cases) {
+        auto vec = i;
+        auto exp = vec;
+        bool end = true;
+        do {
+            end = std::next_permutation(exp.begin(), exp.end());
+            nextPermutation(vec);
+            REQUIRE(vec == exp);
+        } while (end);
+    }
 }
 
 // 1 <= nums.length <= 100
 // 0 <= nums[i] <= 100
-TEST_CASE("Next Permutation Fuzz", "[LC0031][.Fuzz]") {
+TEST_CASE("Next Permutation Fuzz", "[LC0031][Fuzz]") {
     for (int n = 0; n < 10; ++n) {
         constexpr size_t batch = 100;
         std::vector<int> fuzz(batch);
