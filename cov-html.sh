@@ -21,6 +21,6 @@ llvm-cov show ./tests \
     -format=html \
     -output-dir=cov-html
 
-open cov-html/index.html
+w3m cov-html/index.html
 
 popd
