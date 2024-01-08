@@ -11,13 +11,13 @@ cmake -B build \
 cmake --build build --config Debug
 
 pushd build
-LLVM_PROFILE_FILE="tests.profraw" ./tests
+LLVM_PROFILE_FILE="default.profraw" ./tests
 
-llvm-profdata merge -sparse tests.profraw -o tests.profdata
+llvm-profdata merge -sparse default.profraw -o default.profdata
 
 llvm-cov show ./tests \
     -ignore-filename-regex="build/|include/|test/" \
-    -instr-profile=tests.profdata \
+    -instr-profile=default.profdata \
     -format=html \
     -output-dir=cov-html
 
