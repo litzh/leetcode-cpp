@@ -4,30 +4,26 @@
 #include <span>
 #include <vector>
 namespace lc0004 {
-// 有序数列 A[0...N) 的中位数定义:
-// 1. N 为奇数: A[(N+1)/2]
-// 2. N 为偶数: avg(A[N/2]+A[N/2+1])
-// 中位数基于序号，A 中包含重复元素时算法不变
 int findKth(std::span<const int> nums1, std::span<const int> nums2, size_t k) {
-    // 注意 k 从 1 开始
-    while (true) {
-        assert(nums1.size() + nums2.size() >= k);
-        if (nums1.empty())
-            return nums2[k - 1];
-        else if (nums2.empty())
-            return nums1[k - 1];
-        else if (k == 1) {
-            return std::min(nums1[0], nums2[0]);
-        }
-        size_t half = std::min({nums1.size(), nums2.size(), k / 2});
-        assert(k >= half);
-        k -= half;
-        if (nums1[half - 1] > nums2[half - 1]) {
-            nums2 = {nums2.begin() + half, nums2.end()};
+    // k 从 0 开始
+    size_t step = std::min({nums1.size(), nums2.size(), (k + 1) / 2});
+    while (step > 0) {
+        // [0, count-1)[count-1, nums1.size)
+        // [0, count-1)[count-1, nums2.size)
+        if (nums1[step - 1] > nums2[step - 1]) {
+            nums2 = {nums2.begin() + step, nums2.end()};
         } else {
-            nums1 = {nums1.begin() + half, nums1.end()};
+            nums1 = {nums1.begin() + step, nums1.end()};
         }
+        k -= step;
+        step = std::min({nums1.size(), nums2.size(), (k + 1) / 2});
     }
+    if (nums2.empty())
+        return nums1[k];
+    else if (nums1.empty())
+        return nums2[k];
+    else
+        return std::min(nums1[0], nums2[0]);
 }
 
 double findMedianSortedArrays(const std::vector<int> &nums1, const std::vector<int> &nums2) {
@@ -37,11 +33,11 @@ double findMedianSortedArrays(const std::vector<int> &nums1, const std::vector<i
 
     double median = 0.0;
     if ((m + n) % 2 == 1) {
-        int mid = findKth(nums1, nums2, (m + n + 1) / 2);
+        int mid = findKth(nums1, nums2, (m + n) / 2);
         median = static_cast<double>(mid);
     } else {
-        int left = findKth(nums1, nums2, (m + n) / 2);
-        int right = findKth(nums1, nums2, (m + n) / 2 + 1);
+        int left = findKth(nums1, nums2, (m + n) / 2 - 1);
+        int right = findKth(nums1, nums2, (m + n) / 2);
         median = static_cast<double>(left + right) / 2.0;
     }
     return median;
